@@ -1,18 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>cisc.udel.edu</groupId>
-  <artifactId>RenoJavaFX</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cisc.edu</groupId>
+	<artifactId>RenoJavaFX</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>app.Game</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<release>13</release>
-					<compilerArgs>--enable-preview</compilerArgs>
+					<release>15</release>
 				</configuration>
 			</plugin>
 
@@ -32,8 +54,8 @@
 	<properties>
 
 		<!-- Generic properties -->
-		<java.version>1.13</java.version>
-		<JavaFX.Version>13</JavaFX.Version>
+		<java.version>1.15</java.version>
+		<JavaFX.Version>15</JavaFX.Version>
 		<JavaFX.Platform>win</JavaFX.Platform>
 		<!-- <JavaFX.Platform>mac</JavaFX.Platform> -->
 		<!-- <JavaFX.Platform>linux</JavaFX.Platform> -->
@@ -54,25 +76,25 @@
 		<junit.version>4.12</junit.version>
 
 	</properties>
-	<dependencies>
-
-		<dependency>
+	
+    <dependencies>    
+    		<dependency>
 			<groupId>cisc.udel.edu</groupId>
 			<artifactId>RenoBLL</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
+		<dependency>		
 			<groupId>cisc.udel.edu</groupId>
 			<artifactId>RenoJabber</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
+		<dependency>		
 			<groupId>cisc.udel.edu</groupId>
 			<artifactId>RenoServer</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
-		<dependency>
+		
+				<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
 			<version>${JavaFX.Version}</version>
@@ -101,8 +123,16 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>${JavaFX.Version}</version>
 		</dependency>
-	</dependencies>
 
+		<!-- Jackson dependency for XML manipulation -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		
+    </dependencies>
+    
 
 
 </project>
